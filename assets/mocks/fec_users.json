@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "date": "2021-10-02T14:00:21",
+    "name": "Watson, Annete",
+    "mail": "watson.anere@genericadminpanel.com"
+  },
+  {
+    "id": 2,
+    "date": "2021-10-03T14:00:21",
+    "name": "Steward, Calvin",
+    "mail": "calvin.steward@genericadminpanel.com"
+  },
+  {
+    "id": 3,
+    "date": "2021-10-04T14:00:21",
+    "name": "Richards, Ralph",
+    "mail": "ralph.richards@genericadminpanel.com"
+  },
+  {
+    "id": 4,
+    "date": "2021-10-05T14:00:21",
+    "name": "Robertson, Arlene",
+    "mail": "arlene.robertson@genericadminpanel.com"
+  },
+  {
+    "id": 5,
+    "date": "2021-10-06T14:00:21",
+    "name": "Lane, Jane",
+    "mail": "jane.lane@genericadminpanel.com"
+  },
+  {
+    "id": 6,
+    "date": "2021-10-07T14:00:21",
+    "name": "Mckinney, Patrick",
+    "mail": "patrick.mckinney@genericadminpanel.com"
+  },
+  {
+    "id": 7,
+    "date": "2021-10-08T14:00:21",
+    "name": "Smith, Jane",
+    "mail": "jane.smith@genericadminpanel.com"
+  }
+]
