@@ -1,10 +1,8 @@
 import React from 'react';
 import Layout from '../components/layout.component';
-import Badge from '../components/badge.component';
 import Modal from '../components/modal.component';
 import $ from 'jquery';
 
-import shipData from '../../assets/mocks/fec_shipments.json';
 import userData from '../../assets/mocks/fec_users.json';
 import delIcon from '../../assets/icons/delete.svg';
 import editIcon from '../../assets/icons/edit.svg';
@@ -22,7 +20,7 @@ const getImg = (i) =>{
     return arr[i % arr.length];
 }
 
-class Shipments extends React.Component {
+class Users extends React.Component {
     constructor(props) {
         super(props);
 
@@ -45,18 +43,17 @@ class Shipments extends React.Component {
         return (
             <Layout>
                 <div className="row">
-                    <h2 className="col-md-9">Shipments</h2>
+                    <h2 className="col-md-9">Users</h2>
                     <div className="col-md-3">
-                        <button className="btn btn-primary" type="button" data-toggle="modal" data-target="#modalAdd">+ New Shipment</button>
+                        <button className="btn btn-primary" type="button" data-toggle="modal" data-target="#modalAdd">+ Add new user</button>
                     </div>
                 </div>
                 <table className="table table-hover table-borderless">
                     <thead>
                         <tr>
-                            <th>Shipment ID</th>
-                            <th>Date</th>
-                            <th>Owner</th>
-                            <th>Status</th>
+                            <th>User Name</th>
+                            <th>Mail</th>
+                            <th>Date Added</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -244,4 +241,4 @@ class Shipments extends React.Component {
     }
 }
 
-export default Shipments;
+export default Users;

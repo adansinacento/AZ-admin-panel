@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Modal = ({modalId, title, target, btnText, btnContext, children}) => {
+const Modal = ({modalId, title, target, btnText, btnContext, display, children}) => {
     return(
         <div id={modalId} className="modal fade">
             <div className="modal-dialog modal-dialog-centered">
@@ -11,8 +11,8 @@ const Modal = ({modalId, title, target, btnText, btnContext, children}) => {
                         {children}
 
                         <div className="row">
-                            <button type="button" style={{margin: '0px 4px'}} className="btn btn-secondary col-sm-5" data-dismiss="modal">Close</button>
-                            <button type="submit" form={target} style={{margin: '0px 4px'}} className={"col-sm-6 btn " + btnContext}>{btnText}</button>
+                            <button type="button" style={{margin: '0px 4px'}} className="btn btn-secondary col-sm-5" data-dismiss="modal">Cancel</button>
+                            <button type="submit" form={target} style={{margin: '0px 4px'}} className="col-sm-6 btn btn-primary">{btnText}</button>
                         </div>
                         
                     </div>
