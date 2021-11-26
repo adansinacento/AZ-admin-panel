@@ -25,14 +25,13 @@ class Users extends React.Component {
         super(props);
 
         this.state = {
-            shipments: shipData,
+            users: userData,
             editData: {
-                id: '', //default data
-                owner: 'Watson, Annete',
-                status: 'Pending'
+                id: 0, //default data
+                name: '',
+                mail: ''
             },
-            editIndex: 0,
-            deleteId: '',
+            deleteMail: '',
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleUpdate = this.handleUpdate.bind(this);
@@ -60,98 +59,64 @@ class Users extends React.Component {
                     </thead>
                     <tbody>
                         {
-                            this.state.shipments.map((ship, i) => (
-                                <tr className="table-light">
-                                    <td>Shipment {ship.id}</td>
-                                    <td>{ship.date}</td>
-                                    <td><img src={getImg(i)} /> {ship.owner}</td>
-                                    <td><Badge status={ship.status} /></td>
-                                    <td><img onClick={() => this.displayEditModal(ship, i)} src={editIcon} /></td>
-                                    <td><img onClick={() => this.displayRemoveModal(ship.id)} src={delIcon} /></td>
+                            this.state.users.map((user, i) => (
+                                <tr className="table-light" key={i}>
+                                    <td><img src={getImg(i)} /> {user.name}</td>
+                                    <td>{user.mail}</td>
+                                    <td>{user.date}</td>
+                                    <td><img onClick={() => this.displayEditModal(user, i)} src={editIcon} /></td>
+                                    <td><img onClick={() => this.displayRemoveModal(user.mail)} src={delIcon} /></td>
                                 </tr>
                             ))
                         }
                     </tbody>
                 </table>
 
-                {/*Add new shipment modal*/}
+                {/*Add new user modal*/}
                 <Modal 
                     modalId="modalAdd"  
-                    title="Add new shipment" 
+                    title="Add new user" 
                     target="form-add" 
                     btnText="Submit" 
                 >
                     <form onSubmit={this.handleSubmit} id="form-add">
                         <div className="form-group">
-                            <label>Add Shipment ID</label>
+                            <label>Add name user</label>
                             <input type="text" className="form-control" />
                         </div>
                         <div className="form-group">
-                            <label>Select Shipment Owner</label>
-                            <select className="form-control" >
-                                {
-                                    userData.map((usr) =>(
-                                        <option>{usr.name}</option>
-                                    ))
-                                } 
-                            </select>
-                        </div>
-
-                        <div className="form-group">
-                            <label>Select Shipment Status</label>
-                            <select className="form-control" >
-                                {
-                                    statusList.map((sts) =>(
-                                        <option>{sts}</option>
-                                    ))
-                                } 
-                            </select>
+                            <label>Add user's email</label>
+                            <input type="email" className="form-control" />
                         </div>
                     </form>
                 </Modal>
 
                 {/*Edit row modal*/}
                 <Modal modalId="modalEdit"  
-                    title="Edit shipment" 
+                    title="Edit user" 
                     target="form-edit" 
                     btnText="Submit" >
                     <form onSubmit={this.handleUpdate} id="form-edit">
+                        <input type="hidden" value={this.state.editData.id} name="id" />
                         <div className="form-group">
-                            <label>Edit Shipment ID</label>
-                            <input type="text" className="form-control" name="id" value={this.state.editData.id} onChange={this.handleChange} />
+                            <label>Edit name user</label>
+                            <input type="text" className="form-control" name="name" value={this.state.editData.name} onChange={this.handleChange} />
                         </div>
                         <div className="form-group">
-                            <label>Select Shipment Owner</label>
-                            <select className="form-control" name="owner" value={this.state.editData.owner} onChange={this.handleChange} >
-                                {
-                                    userData.map((usr) =>(
-                                        <option>{usr.name}</option>
-                                    ))
-                                } 
-                            </select>
-                        </div>
-
-                        <div className="form-group">
-                            <label>Select Shipment Status</label>
-                            <select className="form-control" name="status" value={this.state.editData.status} onChange={this.handleChange} >
-                                {
-                                    statusList.map((sts) =>(
-                                        <option>{sts}</option>
-                                    ))
-                                } 
-                            </select>
+                            <label>Edit user's email</label>
+                            <input className="form-control" type="email" name="mail" value={this.state.editData.mail} onChange={this.handleChange} />
                         </div>
                     </form>
                 </Modal>
 
                 {/*Delete row modal*/}
                 <Modal modalId="modalDelete"  
-                    title="Delete shipment" 
+                    title="Delete User" 
                     target="form-del" 
                     btnText="Remove" >
                     <p>
-                        Are you sure you want to delete this shipment?<br />
-                        <b>{this.state.deleteId}</b>
+                        Are you sure you want to delete this user?<br />
+                        <b>{this.state.deleteMail}</b>
                     </p>
                     {/*this form is kinda just a trigger to handle de deletion*/}
                     <form id="form-del" onSubmit={this.handleDelete}></form>
@@ -163,15 +128,15 @@ class Users extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         //create new obj
-        const newShip = {
-            id: e.target[0].value,
+        const newUser = {
+            id: this.state.users.length+1,
             date: new Date().toISOString().split('.')[0],
-            owner: e.target[1].value,
-            status: e.target[2].value,
+            name: e.target[0].value,
+            mail: e.target[1].value,
         };
         //add to state
         this.setState(state => ({
-            shipments: state.shipments.concat(newShip),
+            users: state.users.concat(newUser),
         }));
         //close modal
         $('#modalAdd').modal('hide');
@@ -180,7 +145,6 @@ class Users extends React.Component {
     displayEditModal = (data, i) => {
         this.setState(state => ({
             editData: data,
-            editIndex: i,
         }))
         $('#modalEdit').modal('show');
     
@@ -188,7 +152,7 @@ class Users extends React.Component {
 
     displayRemoveModal = (id) => {
         this.setState(state => ({
-            deleteId: id,
+            deleteMail: id,
         }))
         $('#modalDelete').modal('show');
     }
@@ -205,21 +169,21 @@ class Users extends React.Component {
     handleUpdate(e){
         e.preventDefault();
         //get the index of the register we are going to edit
-        var index = this.state.editIndex;
+        var data = this.state.users.slice();
+        var index = data.findIndex((s) => s.id == e.target[0].value);
         //parse the data into an obj
         var updated = {
             id: e.target[0].value,
             date: new Date().toISOString().split('.')[0],
-            owner: e.target[1].value,
-            status: e.target[2].value,
+            name: e.target[1].value,
+            mail: e.target[2].value,
         };
         
         //modify obj in array (copy of)
-        let updShipments = this.state.shipments.slice();
-        updShipments[index] = updated;
+        data[index] = updated;
 
         //set into the state
-        this.setState({shipments: updShipments});
+        this.setState({users: data});
 
         //close the modal
         $('#modalEdit').modal('hide');
@@ -228,13 +192,13 @@ class Users extends React.Component {
     handleDelete(e){
         e.preventDefault();
 
-        var data = this.state.shipments.slice();
-        var index = data.findIndex((s) => s.id === this.state.deleteId);
+        var data = this.state.users.slice();
+        var index = data.findIndex((u) => u.mail === this.state.deleteMail);
 
         data.splice(index, 1);
 
         //set into the state
-        this.setState({shipments: data});
+        this.setState({users: data});
 
         //close the modal
         $('#modalDelete').modal('hide');

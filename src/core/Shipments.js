@@ -64,7 +64,7 @@ class Shipments extends React.Component {
                     <tbody>
                         {
                             this.state.shipments.map((ship, i) => (
-                                <tr className="table-light">
+                                <tr className="table-light" key={i}>
                                     <td>Shipment {ship.id}</td>
                                     <td>{ship.date}</td>
                                     <td><img src={getImg(i)} /> {ship.owner}</td>

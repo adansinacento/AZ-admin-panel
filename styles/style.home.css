@@ -1,0 +1,45 @@
+#root {
+    background-color: #f0f0f0;
+    height: 100vh;
+}
+
+.vertical-line {
+    margin-top: -50px;
+    border-left: 1px solid gray;
+    height: 60vh;
+}
+
+#home-container{
+    padding: 15% 15% 0% 15%;
+}
+
+.align-middle {
+    text-align: center;
+    color: purple;
+}
+
+.home-links{
+    text-align: center;
+    
+}
+
+.link-container{
+    padding: 40px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 6px 6px 5px grey;
+    margin: 25px;
+    width: 250px;
+    height: 250px;
+}
+
+.home-links:hover {
+    text-decoration: none;
+}
+
+.home-links img {
+    width: 80%;
+    margin-left: 8%;
+    vertical-align: middle;
+    
+}

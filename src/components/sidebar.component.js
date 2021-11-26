@@ -7,14 +7,6 @@ import ShipmentActLogo from '../../assets/icons/shipments_active.svg';
 import UsersLogo from '../../assets/icons/users.svg';
 import UsersActLogo from '../../assets/icons/users_active.svg';
 
-const isActive = (history, path) => {
-    if (history.location.pathname === path) {
-        return { color: "#ff9900" }
-    } else {
-        return { color: "#FF00FF" }
-    }
-}
-
 const getLogo = (history, elem) => {
     if (history.location.pathname === elem.url){
         return elem.logoActive;
@@ -39,14 +31,20 @@ let modules = [
 ];
 
 const Sidebar = ({history}) => {
+    const isActive = (history, path) => {
+        return (history.location.pathname === path) ?
+            'active' : 
+            '';
+    }
+
     return (
         <nav id="sidebar">
             <ul className="list-unstyled components">
                 {
                     modules.map((module, i) => (
-                        <li  key={i} style={{marginBottom: '8px'}}>
-                            <div className="text-center">
-                                <Link className="nav-link" to={module.url} style={isActive(history, module.url)}>
+                        <li  key={i} style={{marginBottom: '8px'}} className={isActive(history, module.url)}>
+                            <div className="text-center sidebar-menu">
+                                <Link className="nav-link" to={module.url}>
                                     <img src={getLogo(history, module)} alt={module.text} className="img-fluid" />
                                 </Link>
                             </div>
